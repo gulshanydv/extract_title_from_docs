@@ -44,7 +44,6 @@ def get_title_from_doc(doc_text: str) -> dict:
 
     EXAMPLES OF VALID EXTRACTIONS:
     - Name: "John Michael Smith" → "John Michael Smith"
-    - Name: "Dr. Sarah Johnson" → "Sarah Johnson" 
     - Name: "JANE DOE" → "Jane Doe" (proper case)
 
     - DOB: "01/15/1985" → "01/15/1985"

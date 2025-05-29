@@ -5,4 +5,11 @@ python-dotenv
 PyPDF2
 python-docx
 python-multipart
-openai==0.28
+openai
+python-multipart
+chromadb
+langchain
+langchain-openai
+python-docx
+tiktoken
+numpy
