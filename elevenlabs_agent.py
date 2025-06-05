@@ -52,6 +52,19 @@ class ElevenLabsAgentAPI:
             }
         }
         return self.update_agent_data(agent_id, agent_config)
+    
+
+
+
+    def conversation_detail(self, conversation_id):
+        url = f"{self.base_url}/convai/conversations/{conversation_id}"
+        try:
+            response = requests.get(url, headers=self.headers)
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            print(f"Error getting agent data: {e}")
+            return None
 
    
 def print_agent_info(agent_data):
@@ -146,15 +159,13 @@ def main():
         print("-" * 50)
         print(f"Conversation ended. Conversation ID: {conversation_id}")
         
-        # Try to fetch conversation history
-        if api_client and conversation_id:
-            print("Fetching conversation history...")
-            history = api_client.get_conversation_history(conversation_id)
-            if history:
-                print("Conversation history retrieved successfully")
-                # You can process and display the history here
-                print(f"History keys: {list(history.keys())}")
-        
+        conversation_history = api_client.conversation_detail(conversation_id)
+        for item in conversation_history['transcript']:
+            print(f"Role: {item['role']}")
+            print(f"Message: {item['message'].strip()}\n")
+
+
+
         print("You can use this ID to review the conversation history.")
         
     except KeyboardInterrupt:
@@ -197,5 +208,4 @@ def update_agent_example():
 if __name__ == "__main__":
     # Uncomment the next line if you want to test agent updating
     # update_agent_example()
-    
     main()

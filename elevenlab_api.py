@@ -18,6 +18,37 @@ def get_agent_data(agent_id, api_key):
         print(f"Error getting agent data: {e}")
         return None
 
+
+# def get_conversation( api_key):
+#     url = f"https://api.elevenlabs.io/v1/convai/conversations"
+#     headers = {
+#         "Accept": "application/json",
+#         "xi-api-key": api_key
+#     }
+#     try:
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()
+#         return response.json()
+#     except requests.exceptions.RequestException as e:
+#         print(f"Error getting agent data: {e}")
+#         return None
+
+# def conversation_detail(conversation_id, api_key):
+#     url = f"https://api.elevenlabs.io/v1/convai/conversations/{conversation_id}"
+#     headers = {
+#         "Accept": 'application/json',
+#         "xi-api-key": api_key
+#     }
+
+#     try:
+#         response = requests.get(url, headers=headers)
+#         response.raise_for_status()
+#         return response.json()
+#     except requests.exceptions.RequestException as e:
+#         print(f"Error getting agent data: {e}")
+#         return None
+
+
 def update_agent_prompt():
     agent_id = os.getenv("AGENT_ID")
     api_key = os.getenv("ELEVENLABS_API_KEY")
@@ -29,7 +60,20 @@ def update_agent_prompt():
     # Get current agent data
     print("Getting current agent data...")
     current_data = get_agent_data(agent_id, api_key)
-    print(current_data,'AAAAAAAAAAAAAAAAAaaa')
+
+
+    # conversations = get_conversation(api_key)
+    # # Output result
+    # last_conversation_id = conversations['conversations'][-1]['conversation_id']
+    # # conversation_ids = [conv['conversation_id'] for conv in conversations['conversations']]
+    # # print(conversation_ids)
+    # transcript = conversation_detail(last_conversation_id, api_key)
+
+    # for item in transcript['transcript']:
+    #     print(f"Role: {item['role']}")
+    #     print(f"Message: {item['message'].strip()}\n")
+
+
     print(current_data['conversation_config']['agent']['first_message'])
 
     if current_data is None:
